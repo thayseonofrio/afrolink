@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "babel index.js"
+    "start": "babel dist/index.js",
+    "start:dev": "node ./dist/index.js",
+    "build:dev": "babel . --out-dir dist --ignore 'node_modules/**/*.js'"
   },
   "author": "",
   "license": "ISC",

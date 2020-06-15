@@ -8,16 +8,7 @@ const createProfile = (req, res) => {
       error: "No data provided",
     });
   }
-  const profile = new Profile(body);
-
-  if (!profile) {
-    return res
-      .status(400)
-      .json({ success: false, error: "Error creating profile" });
-  }
-
-  profile
-    .save()
+  const profile = Profile.create(body)
     .then(() => {
       return res.status(201).json({
         success: true,
@@ -31,6 +22,12 @@ const createProfile = (req, res) => {
         message: "Profile was not created",
       });
     });
+
+  if (!profile) {
+    return res
+      .status(400)
+      .json({ success: false, error: "Error creating profile" });
+  }
 };
 
 export { createProfile };

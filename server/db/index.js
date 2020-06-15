@@ -1,12 +1,13 @@
 import mongoose from "mongoose";
 
+const databaseName = "afrolink"
 // todo - add production and dev connection
 mongoose
-  .connect("mongodb://127.0.0.1:27017/afrolink", {
+  .connect(`mongodb://127.0.0.1:27017/${databaseName}`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log("Connected to database"))
+  .then(() => console.log(`Connected to database ${databaseName}`))
   .catch((e) => {
     console.error("Connection error", e.message);
   });

@@ -7,6 +7,8 @@
     "start": "webpack-dev-server --mode development",
     "build": "webpack --mode development",
     "build:prod": "webpack --mode production",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix",
     "test": "test"
   },
   "repository": {
@@ -26,6 +28,8 @@
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.2",
     "css-loader": "^1.0.0",
+    "eslint": "^7.2.0",
+    "eslint-plugin-react": "^7.20.0",
     "file-loader": "^6.0.0",
     "style-loader": "^0.23.0",
     "webpack": "^4.43.0",

@@ -6,4 +6,4 @@ const router = express.Router()
 
 router.post("/profile", createProfile)
 
-export default router;
+export default router

@@ -22,6 +22,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@testing-library/react": "^10.4.6",
+    "axios": "^0.19.2",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
@@ -36,12 +38,15 @@
     "@babel/core": "^7.10.2",
     "@babel/preset-env": "^7.10.2",
     "@babel/preset-react": "^7.0.0",
+    "@testing-library/jest-dom": "^5.11.0",
+    "babel-jest": "^26.1.0",
     "babel-loader": "^8.0.2",
     "css-loader": "^1.0.0",
     "eslint": "^7.2.0",
     "eslint-plugin-react": "^7.20.3",
     "file-loader": "^6.0.0",
     "jest": "^26.0.1",
+    "jest-transform-css": "^2.0.0",
     "rimraf": "^3.0.2",
     "style-loader": "^0.23.0",
     "supertest": "^4.0.2",
@@ -50,13 +55,20 @@
     "webpack-dev-server": "^3.11.0"
   },
   "jest": {
-    "testEnvironment": "node",
+    "testEnvironment": "jsdom",
     "modulePathIgnorePatterns": [
       "<rootDir>/dist/"
     ],
     "coveragePathIgnorePatterns": [
       "/node_modules/",
       "dist/"
-    ]
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/client/src/setuptests.js"
+    ],
+    "transform": {
+      "^.+\\.js$": "babel-jest",
+      ".+\\.(css|styl|less|sass|scss)$": "jest-transform-css"
+    }
   }
 }

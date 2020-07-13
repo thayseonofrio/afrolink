@@ -30,7 +30,8 @@ const createProfile = (req, res) => {
 	}
 }
 
-const getAll = (res) => {
+// TODO - res.status is not a function
+const getAll = (req, res) => {
 	Profile.find({})
 		.then((profiles) => {
 			const profileMap = {}

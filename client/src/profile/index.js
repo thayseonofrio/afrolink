@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from "react"
 import "./profile.css"
+import Label from "../label"
 
 const profile = (props) => {
 	const {name, city, experience, gender, jobTitle, skills, state} = props
@@ -8,8 +9,7 @@ const profile = (props) => {
 		return jobTitle.map(title => <span key={title}> {title} </span>)
 	}
 	const getSkills = () => {
-		// todo - create component to render labels
-		return skills.map(skill => <label key={skill}> {skill} </label>)
+		return skills.map(skill => <Label key={skill} text={skill}/>)
 	}
 	const getSocialLinks = () => {
 		// todo - create component to render socialLinks
@@ -22,24 +22,15 @@ const profile = (props) => {
 				{getJobTitles()}
 				<span>{experience}</span>
 				<span>{city}/{state}</span>
-				{getSkills()}
-				{getSocialLinks()}
+				<div className="skills">
+					{getSkills()}
+				</div>
 			</div>
+			<hr/>
+			{/* {getSocialLinks()} */}
 		</div>
 
 	)
 }
 
 export default profile
-
-
-
-// city: "Porto Alegre"
-// country: "Brasil"
-// experience: 12
-// gender: "Feminino"
-// jobTitle: ["Desenvolvedora"]
-// name: "Teste"
-// skills: (2) ["MongoDB", "JavaScript"]
-// socialLinks: {email: "test@hotmail.com"}
-// state: "RS"

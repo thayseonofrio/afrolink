@@ -1,0 +1,9 @@
+.label {
+    background-color: #999999;
+    border-radius: 3px;
+    border-color: #cccccc;
+    color: #ffffff;
+    margin: 0.3rem;
+    padding: 0.1rem 0.4rem 0.1rem 0.4rem;
+    font-size: small;
+}

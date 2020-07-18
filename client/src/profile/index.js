@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
 import React from "react"
+import Label from "./../label"
+import Social from "./../social"
 import "./profile.css"
-import Label from "../label"
 
 const profile = (props) => {
-	const {name, city, experience, gender, jobTitle, skills, state} = props
+	const {name, city, experience, gender, jobTitle, skills, state, socialLinks} = props
 	const getJobTitles = () => {
 		return jobTitle.map(title => <span key={title}> {title} </span>)
 	}
@@ -12,7 +13,11 @@ const profile = (props) => {
 		return skills.map(skill => <Label key={skill} text={skill}/>)
 	}
 	const getSocialLinks = () => {
-		// todo - create component to render socialLinks
+		const types = Object.keys(socialLinks)
+		return types.map(type => {
+			const link = socialLinks[type]
+			return <Social key={type} type={type} link={link}/>
+		})
 	}
 	return(
 		<div className="card">
@@ -27,7 +32,7 @@ const profile = (props) => {
 				</div>
 			</div>
 			<hr/>
-			{/* {getSocialLinks()} */}
+			{getSocialLinks()}
 		</div>
 
 	)

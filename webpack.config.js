@@ -17,13 +17,24 @@ module.exports = {
 				use: ["style-loader", "css-loader"]
 			},
 			{
-				test: /\.(png|jpe?g|gif)$/i,
+				test: /\.(png|svg|jpe?g|gif)$/i,
 				use: [
 					{
 						loader: "file-loader",
+						options: {
+							name: "[name].[ext]",
+							esModule: false
+						}
 					},
 				],
-			}
+			},
+			{
+				test: /\.(jpg|jpeg|svg|png)$/,
+				use: {
+				 loader: 'url-loader'
+				}
+			 }
+
 		]
 	},
 	resolve: { extensions: ["*", ".js", ".jsx"] },

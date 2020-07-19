@@ -1,6 +1,6 @@
 import React from "react"
 import Profile from "."
-import { render, screen } from "@testing-library/react"
+import { render, screen } from "../components/list/@testing-library/react"
 
 const profileData = {
 	city: "Porto Alegre",

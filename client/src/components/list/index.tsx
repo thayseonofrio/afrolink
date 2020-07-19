@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react"
-import apis from "../services/profile"
+import apis from "../../services/profile"
 import Profile from "../profile/index"
-import { ProfileType } from "../types/profile"
+import { ProfileType } from "../../types/profile"
+import "./list.css"
 
 const list = () => {
 	const [profiles, setProfiles] = useState<ProfileType>()
@@ -19,7 +20,7 @@ const list = () => {
 		}
 		return null
 	}
-	return( <> {getProfiles()} </>)
+	return( <div className="list"> {getProfiles()} </div>)
 }
 
 export default list

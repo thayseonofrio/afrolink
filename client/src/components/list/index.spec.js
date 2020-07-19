@@ -1,7 +1,7 @@
 import React from "react"
-import apis from "../services/profile"
+import apis from "../../services/profile"
 import List from "."
-import { render } from "@testing-library/react"
+import { render } from "./@testing-library/react"
 
 jest.mock("../services/profile")
 

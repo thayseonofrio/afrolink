@@ -1,6 +1,6 @@
 import React from "react"
-import Label from "./../label/index"
-import Social from "./../social/index"
+import Label from "../label/index"
+import Social from "../social/index"
 import "./profile.css"
 
 const profile = (props) => {

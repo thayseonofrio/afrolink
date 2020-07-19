@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react"
 import apis from "../services/profile"
-import Profile from "../profile"
+import Profile from "../profile/index"
+import { ProfileType } from "../types/profile"
 
 const list = () => {
-	const [profiles, setProfiles] = useState()
+	const [profiles, setProfiles] = useState<ProfileType>()
 
 	useEffect(() => {
 		apis.getAllProfiles().then((response) => {
@@ -18,7 +19,7 @@ const list = () => {
 		}
 		return null
 	}
-	return(getProfiles())
+	return( <> {getProfiles()} </>)
 }
 
 export default list

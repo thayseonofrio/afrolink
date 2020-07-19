@@ -1,7 +1,6 @@
-/* eslint-disable react/prop-types */
 import React from "react"
-import Label from "./../label"
-import Social from "./../social"
+import Label from "./../label/index"
+import Social from "./../social/index"
 import "./profile.css"
 
 const profile = (props) => {

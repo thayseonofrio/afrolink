@@ -31,7 +31,9 @@ const profile = (props) => {
 				</div>
 			</div>
 			<hr/>
-			{getSocialLinks()}
+			<div className="socialLinks">
+				{getSocialLinks()}
+			</div>
 		</div>
 
 	)

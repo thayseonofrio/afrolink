@@ -46,3 +46,10 @@
     padding: 0;
     width: 100%;
 }
+
+.card .socialLinks {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 80%;
+}

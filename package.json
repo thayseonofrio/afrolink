@@ -52,6 +52,7 @@
     "source-map-loader": "^1.0.1",
     "style-loader": "^0.23.0",
     "supertest": "^4.0.2",
+    "svg-url-loader": "^6.0.0",
     "ts-loader": "^8.0.1",
     "typescript": "^3.9.7",
     "url-loader": "^4.1.0",

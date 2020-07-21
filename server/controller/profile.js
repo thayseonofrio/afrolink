@@ -30,4 +30,21 @@ const createProfile = (req, res) => {
 	}
 }
 
-export { createProfile }
+const getAll = (req, res) => {
+	Profile.find({})
+		.then((profiles) => {
+			const profileMap = {}
+			profiles.forEach((profile) => {
+				profileMap[profile._id] = profile
+			})
+			res.send(profileMap)
+		})
+		.catch((error) => {
+			return res.status(404).json({
+				error,
+				message: "No profiles available",
+			})
+		})
+}
+
+export { createProfile, getAll }

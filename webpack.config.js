@@ -1,42 +1,68 @@
-const path = require("path")
-const webpack = require("webpack")
+const path = require("path");
+const webpack = require("webpack");
 
 module.exports = {
-	entry: "./client/src/index.js",
-	mode: "development",
-	module: {
-		rules: [
-			{
-				test: /\.(js|jsx)$/,
-				exclude: /(node_modules|bower_components)/,
-				loader: "babel-loader",
-				options: { presets: ["@babel/env"] }
-			},
-			{
-				test: /\.css$/,
-				use: ["style-loader", "css-loader"]
-			},
-			{
-				test: /\.(png|jpe?g|gif)$/i,
-				use: [
-					{
-						loader: "file-loader",
-					},
-				],
-			}
-		]
-	},
-	resolve: { extensions: ["*", ".js", ".jsx"] },
-	output: {
-		path: path.resolve(__dirname, "client/dist/"),
-		publicPath: "/client/dist/",
-		filename: "bundle.js"
-	},
-	devServer: {
-		contentBase: path.join(__dirname, "client/public/"),
-		port: 3000,
-		publicPath: "http://localhost:3000/dist/",
-		hotOnly: true
-	},
-	plugins: [new webpack.HotModuleReplacementPlugin()]
-}
+  entry: "./client/src/index.tsx",
+  mode: "development",
+  module: {
+    rules: [
+      {
+        test: /\.(t|j)sx?$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: "ts-loader",
+      },
+      {
+        enforce: "pre",
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: "source-map-loader",
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: "file-loader",
+            options: {},
+          },
+        ],
+      },
+      {
+        test: /\.(jpg|jpeg|png)$/,
+        use: {
+          loader: "url-loader",
+        },
+	  },
+	  {
+		  test: /\.svg$/,
+		  use: [
+			  {
+				  loader: "svg-url-loader",
+				  options: {
+					  limit: 10000,
+				  }
+			  }
+		  ]
+	  }
+    ],
+  },
+  resolve: {
+    extensions: [".ts", ".tsx", ".js", ".jsx"],
+  },
+  output: {
+    path: path.resolve(__dirname, "/dist/"),
+    publicPath: "/dist/",
+    filename: "bundle.js",
+  },
+  devServer: {
+    contentBase: path.join(__dirname, "client/public/"),
+    port: 3000,
+    publicPath: "http://localhost:3000/dist/",
+    hotOnly: true,
+  },
+  devtool: "source-map",
+  plugins: [new webpack.HotModuleReplacementPlugin()],
+};

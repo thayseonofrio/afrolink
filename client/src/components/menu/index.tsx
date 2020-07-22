@@ -1,7 +1,12 @@
 import React from "react"
 import "./menu.css"
 
-const menu = ({setToggle, toggle}) => {
+type MenuProps = {
+    setToggle: Function,
+    toggle: boolean
+}
+
+const menu = ({setToggle, toggle}: MenuProps) => {
     const setToggleRegisterHandler = () => {
         setToggle(!toggle)
     }

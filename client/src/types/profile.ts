@@ -1,11 +1,11 @@
 export type ProfileType = {
-    city: String,
-    country: String,
-    experience: Number,
-    gender: String,
-    jobTitle: String[],
-    name: String,
-    skills: String,
+    city: string,
+    country: string,
+    experience: number,
+    gender: string,
+    jobTitle: string[],
+    name: string,
+    skills: string[],
     socialLinks: any, // TODO
-    state: String
+    state: string
 }

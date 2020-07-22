@@ -2,8 +2,9 @@ import React from "react"
 import Label from "../label/index"
 import Social from "../social/index"
 import "./profile.css"
+import { ProfileType } from "client/src/types/profile"
 
-const profile = (props) => {
+const profile = (props: ProfileType) => {
 	const {name, city, experience, gender, jobTitle, skills, state, socialLinks} = props
 	const getJobTitles = () => {
 		return jobTitle.map(title => <span key={title}> {title} </span>)

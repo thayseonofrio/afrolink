@@ -1,7 +1,12 @@
 import React from "react"
 
-const social = ({type, link}) => {
-	const getIconPath = (type) => require(`./../../assets/${type}.svg`)
+type SocialType = {
+	type: string,
+	link: string
+}
+
+const social = ({type, link}: SocialType) => {
+	const getIconPath = (type: string) => require(`./../../assets/${type}.svg`)
 
 	// TODO - change email link
 

@@ -4,13 +4,14 @@ import "./App.css";
 import List from "./components/list";
 import Menu from "./components/menu";
 import Header from "./components/header";
+import Register from "./components/register";
 
 const App = () => {
 	const [toggleRegister, setToggleRegister] = useState(false)
 
 	const getPageToDisplay = () => {
 		if (toggleRegister) {
-			return "profile"
+			return <Register />
 		}
 		return <List />
 	}

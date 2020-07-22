@@ -24,7 +24,7 @@ const profile = (props) => {
 			<div className="info">
 				<span>{gender}</span>
 				{getJobTitles()}
-				<span>{experience}</span>
+				<span>{experience} meses </span>
 				<span>{city}/{state}</span>
 				<div className="skills">
 					{getSkills()}

@@ -33,6 +33,7 @@
 .card .info .skills {
     width: 100%;
     display: inline-flex;
+    flex-wrap: wrap;
     align-items: flex-start;
     padding-top: 0.5rem;
 }

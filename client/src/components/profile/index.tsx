@@ -16,7 +16,7 @@ const profile = (props: ProfileType) => {
 		const types = Object.keys(socialLinks)
 		return types.map(type => {
 			const link = socialLinks[type]
-			return <Social key={type} type={type} link={link}/>
+			return <Social key={type} type={type} value={link}/>
 		})
 	}
 	return(

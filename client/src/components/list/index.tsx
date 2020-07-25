@@ -5,7 +5,7 @@ import { ProfileType } from "../../types/profile"
 import "./list.css"
 
 const list = () => {
-	const [profiles, setProfiles] = useState<ProfileType>()
+	const [profiles, setProfiles] = useState<ProfileType[]>()
 
 	useEffect(() => {
 		apis.getAllProfiles().then((response) => {

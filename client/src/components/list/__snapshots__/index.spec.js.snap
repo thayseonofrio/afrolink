@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<List /> should render list with profile 1`] = `
+<div>
+  <div
+    class="list"
+  >
+     
+    <div
+      class="card"
+    >
+      <h2>
+         
+        Teste
+         
+      </h2>
+      <div
+        class="info"
+      >
+        <span>
+          Feminino
+        </span>
+        <span>
+           
+          Desenvolvedora
+           
+        </span>
+        <span>
+          12
+           meses 
+        </span>
+        <span>
+          Porto Alegre
+          /
+          RS
+        </span>
+        <div
+          class="skills"
+        >
+          <span
+            class="label"
+          >
+             
+            MongoDB
+             
+          </span>
+          <span
+            class="label"
+          >
+             
+            JavaScript
+             
+          </span>
+        </div>
+      </div>
+      <hr />
+      <div
+        class="socialLinks"
+      >
+        <a
+          class="social"
+          href="mailto:test@hotmail.com"
+          target="_blank"
+        >
+          <img
+            alt="email link"
+            src="test-file-stub"
+          />
+        </a>
+      </div>
+    </div>
+     
+  </div>
+</div>
+`;

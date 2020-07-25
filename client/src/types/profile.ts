@@ -1,3 +1,7 @@
+type SocialLinksType = {
+    [key: string]: string
+}
+
 export type ProfileType = {
     city: string,
     country: string,
@@ -6,6 +10,6 @@ export type ProfileType = {
     jobTitle: string[],
     name: string,
     skills: string[],
-    socialLinks: any, // TODO
+    socialLinks: SocialLinksType,
     state: string
 }

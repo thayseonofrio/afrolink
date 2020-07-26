@@ -1,63 +1,83 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { ProfileType } from "client/src/types/profile";
+import { TextField, Button } from "@material-ui/core";
+import Gender from "./fields/gender";
+import JobTitle from "./fields/jobTitle";
+import Skill from "./fields/skill";
+import "./register.css";
+
+// TODO - add validation
+// TODO - send to backend
+// TODO - redirect to home after submit
 
 const register = () => {
-  const { register, setValue, handleSubmit, errors } = useForm<ProfileType>();
-  const onSubmit = handleSubmit((props) => {
-    console.log(props);
-  });
+  const { register, handleSubmit } = useForm<ProfileType>();
+  const [gender, setGender] = React.useState("");
+  const [jobTitle, setJobTitle] = React.useState<string[]>([]);
+  const [skill, setSkill] = React.useState<string[]>([]);
+
+  const onSubmit = handleSubmit(
+    ({
+      name,
+      experience,
+      // email,
+      // site,
+      // github,
+      // linkedin,
+      city,
+      state,
+      country,
+    }) => {
+      console.log(name);
+      console.log(experience);
+      // console.log(email);
+      // console.log(site);
+      // console.log(github);
+      // console.log(linkedin);
+      console.log(city);
+      console.log(state);
+      console.log(country);
+      console.log(gender);
+      console.log(jobTitle);
+    }
+  );
 
   return (
-    <form onSubmit={onSubmit}>
-      <label>Nome</label>
-      <input name="name" ref={register} />
+    <div className="register">
+      <form onSubmit={onSubmit}>
+        <TextField inputRef={register} name="name" label="Nome" />
 
-      <label>Gênero</label>
-      <select name="gender" ref={register}>
-        <option value="female">Feminino</option>
-        <option value="male">Masculino</option>
-        <option value="other">Outro</option>
-      </select>
+        <Gender value={gender} setGender={setGender} />
 
-      {/* TODO: transform in multiple inputs */}
-      <label>Profissão</label>
-      <input name="jobTitle" ref={register} />
+        <JobTitle value={jobTitle} setJobTitle={setJobTitle} />
 
-      <label>Tempo de experiência</label>
-      <input name="experience" type="number" ref={register} />
+        <TextField
+          inputRef={register}
+          name="experience"
+          type="number"
+          label="Tempo de Experiência (em meses)"
+        />
 
-      {/* TODO: data comes from DB */}
-      <label>Habilidades</label>
-      <select name="skills" id="skills" multiple>
-        <option value="angular">Angular</option>
-        <option value="react">React</option>
-        <option value="java">Java</option>
-      </select>
+        <Skill value={skill} setSkill={setSkill} />
 
-      <label>E-mail</label>
-      <input name="email" type="email" ref={register} />
+        <TextField
+          inputRef={register}
+          name="email"
+          type="email"
+          label="E-mail"
+        />
+        <TextField inputRef={register} name="site" label="Site" />
+        <TextField inputRef={register} name="github" label="GitHub" />
+        <TextField inputRef={register} name="linkedin" label="LinkedIn" />
 
-      <label>Site</label>
-      <input name="site" ref={register} />
+        <TextField inputRef={register} name="city" label="Cidade" />
+        <TextField inputRef={register} name="state" label="Estado" />
+        <TextField inputRef={register} name="country" label="País" />
 
-      <label>Github</label>
-      <input name="github" ref={register} />
-
-      <label>Linkedin</label>
-      <input name="linkedin" ref={register} />
-
-      <label>Cidade</label>
-      <input name="city" ref={register} />
-
-      <label>Estado</label>
-      <input name="state" ref={register} />
-
-      <label>País</label>
-      <input name="country" ref={register} />
-
-      <input type="submit" />
-    </form>
+        <Button type="submit"> Enviar </Button>
+      </form>
+    </div>
   );
 };
 

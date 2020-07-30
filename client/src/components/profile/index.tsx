@@ -13,6 +13,9 @@ const profile = (props: ProfileType) => {
 		return skills.map(skill => <Label key={skill} text={skill}/>)
 	}
 	const getSocialLinks = () => {
+		if (!socialLinks) {
+			return null
+		}
 		const types = Object.keys(socialLinks)
 		return types.map(type => {
 			const link = socialLinks[type]

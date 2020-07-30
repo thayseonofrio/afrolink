@@ -6,40 +6,53 @@ import Gender from "./fields/gender";
 import JobTitle from "./fields/jobTitle";
 import Skill from "./fields/skill";
 import "./register.css";
+import apis from "./../../services/profile"
 
 // TODO - add validation
-// TODO - send to backend
+// TODO - add social links
 // TODO - redirect to home after submit
 
+type SocialLinksType = {
+  email: string,
+  site: string,
+  github: string,
+  linkedin: string
+}
+
 const register = () => {
-  const { register, handleSubmit } = useForm<ProfileType>();
+  const { register, handleSubmit } = useForm<ProfileType & SocialLinksType>();
   const [gender, setGender] = React.useState("");
   const [jobTitle, setJobTitle] = React.useState<string[]>([]);
-  const [skill, setSkill] = React.useState<string[]>([]);
+  const [skills, setSkill] = React.useState<string[]>([]);
 
   const onSubmit = handleSubmit(
     ({
       name,
       experience,
-      // email,
-      // site,
-      // github,
-      // linkedin,
+      email,
+      site,
+      github,
+      linkedin,
       city,
       state,
       country,
     }) => {
-      console.log(name);
-      console.log(experience);
-      // console.log(email);
-      // console.log(site);
-      // console.log(github);
-      // console.log(linkedin);
-      console.log(city);
-      console.log(state);
-      console.log(country);
-      console.log(gender);
-      console.log(jobTitle);
+      const socialLinks = {
+        email,
+        site,
+        github,
+        linkedin
+      }
+
+      apis.createProfile({name, experience, city, skills, socialLinks, state, country, gender, jobTitle})
+      .then((response) => {
+        // TODO - show response
+        console.log(response)
+      })
+      .catch((error) => {
+        // TODO - show error
+        console.log(error)
+      })
     }
   );
 
@@ -59,7 +72,7 @@ const register = () => {
           label="Tempo de Experiência (em meses)"
         />
 
-        <Skill value={skill} setSkill={setSkill} />
+        <Skill value={skills} setSkill={setSkill} />
 
         <TextField
           inputRef={register}

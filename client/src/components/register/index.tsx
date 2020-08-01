@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { ProfileType } from "client/src/types/profile";
 import { TextField, Button } from "@material-ui/core";
@@ -8,7 +8,7 @@ import Skill from "./fields/skill";
 import "./register.css";
 import apis from "./../../services/profile"
 
-// TODO - redirect to home after submit
+// TODO - clear error on form change
 
 type SocialLinksType = {
   email: string,
@@ -17,11 +17,16 @@ type SocialLinksType = {
   linkedin: string
 }
 
-const register = () => {
+type RegisterProps = {
+  hideRegister: Function
+}
+
+const register = ({hideRegister}: RegisterProps) => {
   const { register, handleSubmit } = useForm<ProfileType & SocialLinksType>();
   const [gender, setGender] = React.useState("female");
   const [jobTitle, setJobTitle] = React.useState<string[]>([]);
   const [skills, setSkill] = React.useState<string[]>([]);
+  const [formError, setFormError] = React.useState(false);
 
   const onSubmit = handleSubmit(
     ({
@@ -43,16 +48,16 @@ const register = () => {
       }
 
       apis.createProfile({name, experience, city, skills, socialLinks, state, country, gender, jobTitle})
-      .then((response) => {
-        // TODO - show response
-        console.log(response)
+      .then(() => {
+        hideRegister(false)
       })
-      .catch((error) => {
-        // TODO - show error
-        console.log(error)
+      .catch(() => {
+        setFormError(true)
       })
     }
   );
+
+  const errorMessage = formError ? <span> Ocorreu um erro ao cadastrar o perfil. Tente novamente. </span> : null
 
   return (
     <div className="register">
@@ -89,6 +94,8 @@ const register = () => {
         <TextField id="countryInput" inputRef={register({ required: true })} name="country" label="País" />
 
         <Button type="submit"> Enviar </Button>
+
+        {errorMessage}
       </form>
     </div>
   );

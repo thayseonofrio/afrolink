@@ -11,7 +11,7 @@ const App = () => {
 
 	const getPageToDisplay = () => {
 		if (toggleRegister) {
-			return <Register />
+			return <Register hideRegister={setToggleRegister}/>
 		}
 		return <List />
 	}

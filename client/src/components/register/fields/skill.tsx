@@ -25,7 +25,7 @@ const MenuProps = {
   },
 };
 
-// todo - come from backend
+// TODO - come from backend
 const skills = [
     "Angular",
     "React",

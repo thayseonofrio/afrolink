@@ -13,4 +13,13 @@ describe("<Profile />", () => {
 		expect(screen.getByText(profileData.jobTitle[0])).toBeInTheDocument()
 		expect(screen.getByText(profileData.state, { exact: false })).toBeInTheDocument()
 	})
+
+	it("should render Profile if there are no social links", () => {
+		const data = {
+			...profileData,
+			socialLinks: null
+		}
+		render(<Profile {...data} />)
+		expect(screen.getByText(profileData.name)).toBeInTheDocument()
+	})
 })

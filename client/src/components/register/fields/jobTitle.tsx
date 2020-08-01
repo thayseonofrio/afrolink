@@ -25,18 +25,12 @@ const MenuProps = {
   },
 };
 
-// TODO - add job titles
+// TODO - come from backend
 const jobTitles = [
-    "Oliver Hansen",
-    "Van Henry",
-    "April Tucker",
-    "Ralph Hubbard",
-    "Omar Alexander",
-    "Carlos Abbott",
-    "Miriam Wagner",
-    "Bradley Wilkerson",
-    "Virginia Andrews",
-    "Kelly Snyder",
+    "Desenvolvedora",
+    "Infraestrutura",
+    "Analista de Negócios",
+    "QA"
   ];
 
 const jobTitle = ({value, setJobTitle}: JobTitleProps) => {

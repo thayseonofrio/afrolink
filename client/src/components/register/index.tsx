@@ -1,5 +1,5 @@
 import React from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { ProfileType } from "client/src/types/profile";
 import { TextField, Button } from "@material-ui/core";
 import Gender from "./fields/gender";
@@ -8,8 +8,6 @@ import Skill from "./fields/skill";
 import "./register.css";
 import apis from "./../../services/profile"
 
-// TODO - add validation
-// TODO - add social links
 // TODO - redirect to home after submit
 
 type SocialLinksType = {
@@ -21,7 +19,7 @@ type SocialLinksType = {
 
 const register = () => {
   const { register, handleSubmit } = useForm<ProfileType & SocialLinksType>();
-  const [gender, setGender] = React.useState("");
+  const [gender, setGender] = React.useState("female");
   const [jobTitle, setJobTitle] = React.useState<string[]>([]);
   const [skills, setSkill] = React.useState<string[]>([]);
 
@@ -59,14 +57,15 @@ const register = () => {
   return (
     <div className="register">
       <form onSubmit={onSubmit}>
-        <TextField inputRef={register} name="name" label="Nome" />
+        <TextField id="nameInput" inputRef={register({ required: true, maxLength: 200 })} name="name" label="Nome" />
 
-        <Gender value={gender} setGender={setGender} />
+        <Gender value={gender} setGender={setGender} inputRef={register({ required: true })}/>
 
         <JobTitle value={jobTitle} setJobTitle={setJobTitle} />
 
         <TextField
-          inputRef={register}
+          id="experienceInput"
+          inputRef={register({ required: true })}
           name="experience"
           type="number"
           label="Tempo de Experiência (em meses)"
@@ -75,18 +74,19 @@ const register = () => {
         <Skill value={skills} setSkill={setSkill} />
 
         <TextField
-          inputRef={register}
+          id="emailInput"
+          inputRef={register({ pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ })}
           name="email"
           type="email"
           label="E-mail"
         />
-        <TextField inputRef={register} name="site" label="Site" />
-        <TextField inputRef={register} name="github" label="GitHub" />
-        <TextField inputRef={register} name="linkedin" label="LinkedIn" />
+        <TextField id="siteInput" inputRef={register} name="site" label="Site" />
+        <TextField id="githubInput" inputRef={register} name="github" label="GitHub" />
+        <TextField id="linkedinInput" inputRef={register} name="linkedin" label="LinkedIn" />
 
-        <TextField inputRef={register} name="city" label="Cidade" />
-        <TextField inputRef={register} name="state" label="Estado" />
-        <TextField inputRef={register} name="country" label="País" />
+        <TextField id="cityInput" inputRef={register({ required: true })} name="city" label="Cidade" />
+        <TextField id="stateInput" inputRef={register({ required: true })} name="state" label="Estado" />
+        <TextField id="countryInput" inputRef={register({ required: true })} name="country" label="País" />
 
         <Button type="submit"> Enviar </Button>
       </form>

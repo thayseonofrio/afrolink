@@ -4,9 +4,10 @@ import { TextField, MenuItem } from "@material-ui/core";
 type GenderProps = {
   value: string;
   setGender: Function;
+  inputRef: any;
 };
 
-const gender = ({ value, setGender }: GenderProps) => {
+const gender = ({ value, setGender, inputRef }: GenderProps) => {
   const handleGenderSelection = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -17,6 +18,7 @@ const gender = ({ value, setGender }: GenderProps) => {
     <TextField
       id="gender"
       select
+      inputRef={inputRef}
       name="gender"
       label="Gênero"
       value={value}

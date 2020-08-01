@@ -14,4 +14,9 @@ describe("Profile Service", () => {
 		mockAxios.mockResponse({data: [profileData]})
 		expect(thenFn).toHaveBeenCalledWith((expect.objectContaining({data: [profileData]})))
 	})
+
+	it("should create profile", () => {
+		apis.createProfile(profileData).then(thenFn)
+		expect(mockAxios.post).toHaveBeenCalledWith("/profile", profileData)
+	})
 })

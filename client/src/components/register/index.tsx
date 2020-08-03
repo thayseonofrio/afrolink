@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { ProfileType } from "client/src/types/profile";
 import { TextField, Button } from "@material-ui/core";
 import Gender from "./fields/gender";
 import JobTitle from "./fields/jobTitle";
 import Skill from "./fields/skill";
+import State from "./fields/state";
+import City from "./fields/city";
 import "./register.css";
 import apis from "./../../services/profile"
 
@@ -26,6 +28,8 @@ const register = ({hideRegister}: RegisterProps) => {
   const [gender, setGender] = React.useState("female");
   const [jobTitle, setJobTitle] = React.useState<string[]>([]);
   const [skills, setSkill] = React.useState<string[]>([]);
+  const [stateInput, setStateInput] = React.useState("");
+  const [city, setCity] = React.useState("");
   const [formError, setFormError] = React.useState(false);
 
   const onSubmit = handleSubmit(
@@ -37,7 +41,6 @@ const register = ({hideRegister}: RegisterProps) => {
       github,
       linkedin,
       city,
-      state,
       country,
     }) => {
       const socialLinks = {
@@ -47,7 +50,7 @@ const register = ({hideRegister}: RegisterProps) => {
         linkedin
       }
 
-      apis.createProfile({name, experience, city, skills, socialLinks, state, country, gender, jobTitle})
+      apis.createProfile({name, experience, city, skills, socialLinks, state: stateInput, country, gender, jobTitle})
       .then(() => {
         hideRegister(false)
       })
@@ -89,9 +92,13 @@ const register = ({hideRegister}: RegisterProps) => {
         <TextField id="githubInput" inputRef={register} name="github" label="GitHub" />
         <TextField id="linkedinInput" inputRef={register} name="linkedin" label="LinkedIn" />
 
-        <TextField id="cityInput" inputRef={register({ required: true })} name="city" label="Cidade" />
-        <TextField id="stateInput" inputRef={register({ required: true })} name="state" label="Estado" />
-        <TextField id="countryInput" inputRef={register({ required: true })} name="country" label="País" />
+        <TextField id="countryInput" defaultValue="Brasil" inputRef={register({ required: true })} name="country" label="País" InputProps={{
+            readOnly: true,
+          }}/>
+
+        <State value={stateInput} setStateInput={setStateInput} inputRef={register({ required: true })}/>
+
+        {stateInput ? <City value={city} setCity={setCity} stateValue={stateInput} inputRef={register({ required: true })} /> : null}
 
         <Button type="submit"> Enviar </Button>
 

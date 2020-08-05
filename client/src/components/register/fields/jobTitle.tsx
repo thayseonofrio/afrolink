@@ -8,6 +8,7 @@ import {
     ListItemText,
     Checkbox,
   } from "@material-ui/core";
+import jobTitles from "./../../../../../data/jobTitles"
 
 type JobTitleProps = {
     value: string[],
@@ -24,14 +25,6 @@ const MenuProps = {
     },
   },
 };
-
-// TODO - come from backend
-const jobTitles = [
-    "Desenvolvedora",
-    "Infraestrutura",
-    "Analista de Negócios",
-    "QA"
-  ];
 
 const jobTitle = ({value, setJobTitle}: JobTitleProps) => {
 

@@ -8,6 +8,7 @@ import {
     ListItemText,
     Checkbox,
   } from "@material-ui/core";
+import languages from "./../../../../../data/languages"
 
 type SkillsProps = {
     value: string[],
@@ -24,14 +25,6 @@ const MenuProps = {
     },
   },
 };
-
-// TODO - come from backend
-const skills = [
-    "Angular",
-    "React",
-    "Java",
-    "MongoDB",
-  ];
 
 const skill = ({value, setSkill}: SkillsProps) => {
 
@@ -55,7 +48,7 @@ const skill = ({value, setSkill}: SkillsProps) => {
           renderValue={(selected) => (selected as string[]).join(", ")}
           MenuProps={MenuProps}
         >
-          {skills.map((skill) => (
+          {languages.map((skill) => (
             <MenuItem key={skill} value={skill}>
               <Checkbox checked={value.indexOf(skill) > -1} />
               <ListItemText primary={skill} />

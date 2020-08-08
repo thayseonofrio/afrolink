@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { TextField, MenuItem } from "@material-ui/core";
 import { getCitiesByState } from "./../../../services/location"
+import sortBy from "lodash/sortBy"
 
 type CityProps = {
   value: string;
@@ -21,7 +22,11 @@ const city = ({ value, stateValue, setCity, inputRef }: CityProps) => {
     let isMounted = true;
     if (stateValue && isMounted) {
       getCitiesByState(stateValue)
-      .then((response) => setCityList(response.data))
+      .then((response) => {
+        const cities = sortBy(response.data, city => city.nome)
+        setCityList(cities)
+      }
+      )
       .catch((err) => console.log(err))
     }
     return () => { isMounted = false };

@@ -7,10 +7,9 @@ import JobTitle from "./fields/jobTitle";
 import Skill from "./fields/skill";
 import State from "./fields/state";
 import City from "./fields/city";
-import "./register.css";
 import apis from "./../../services/profile"
+import { makeStyles } from "@material-ui/core/styles";
 
-// TODO - clear error on form change
 
 type SocialLinksType = {
   email: string,
@@ -23,14 +22,26 @@ type RegisterProps = {
   hideRegister: Function
 }
 
+const useStyles = makeStyles({
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    "& div": {
+      marginBottom: "10px"
+    }
+  }
+});
+
 const register = ({hideRegister}: RegisterProps) => {
   const { register, handleSubmit } = useForm<ProfileType & SocialLinksType>();
   const [gender, setGender] = React.useState("female");
   const [jobTitle, setJobTitle] = React.useState<string[]>([]);
   const [skills, setSkill] = React.useState<string[]>([]);
   const [stateInput, setStateInput] = React.useState("");
-  const [city, setCity] = React.useState("");
+  const [cityInput, setCityInput] = React.useState("");
   const [formError, setFormError] = React.useState(false);
+  const classes = useStyles();
+
 
   const onSubmit = handleSubmit(
     ({
@@ -40,7 +51,6 @@ const register = ({hideRegister}: RegisterProps) => {
       site,
       github,
       linkedin,
-      city,
       country,
     }) => {
       const socialLinks = {
@@ -50,7 +60,7 @@ const register = ({hideRegister}: RegisterProps) => {
         linkedin
       }
 
-      apis.createProfile({name, experience, city, skills, socialLinks, state: stateInput, country, gender, jobTitle})
+      apis.createProfile({name, experience, city: cityInput, skills, socialLinks, state: stateInput, country, gender, jobTitle})
       .then(() => {
         hideRegister(false)
       })
@@ -64,7 +74,7 @@ const register = ({hideRegister}: RegisterProps) => {
 
   return (
     <div className="register">
-      <form onSubmit={onSubmit}>
+      <form className={classes.form} onSubmit={onSubmit}>
         <TextField id="nameInput" inputRef={register({ required: true, maxLength: 200 })} name="name" label="Nome" />
 
         <Gender value={gender} setGender={setGender} inputRef={register({ required: true })}/>
@@ -98,7 +108,7 @@ const register = ({hideRegister}: RegisterProps) => {
 
         <State value={stateInput} setStateInput={setStateInput} inputRef={register({ required: true })}/>
 
-        {stateInput ? <City value={city} setCity={setCity} stateValue={stateInput} inputRef={register({ required: true })} /> : null}
+        {stateInput ? <City value={cityInput} setCity={setCityInput} stateValue={stateInput} inputRef={register({ required: true })} /> : null}
 
         <Button type="submit"> Enviar </Button>
 

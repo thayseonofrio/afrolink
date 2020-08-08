@@ -20,7 +20,7 @@ jobs:
       run: npm i 
 
     - name: Run linter
-      run: npm lint
+      run: npm run lint
       
     - name: Run unit tests
-      run: npm test
+      run: npm run test

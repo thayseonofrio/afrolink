@@ -3,73 +3,87 @@
 exports[`<List /> should render list with profile 1`] = `
 <div>
   <div
-    class="list"
+    class="makeStyles-root-1"
   >
-
     <div
-      class="card"
+      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
     >
-      <h2>
-
-        Teste
-
-      </h2>
       <div
-        class="info"
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6"
       >
-        <span>
-          Feminino
-        </span>
-        <span>
-
-          Desenvolvedora
-
-        </span>
-        <span>
-          12
-           meses
-        </span>
-        <span>
-          Porto Alegre
-          /
-          RS
-        </span>
         <div
-          class="skills"
+          class="MuiPaper-root makeStyles-paper-2 MuiPaper-elevation1 MuiPaper-rounded"
         >
-          <span
-            class="label"
+          <div
+            class="makeStyles-root-3"
           >
-
-            MongoDB
-
-          </span>
-          <span
-            class="label"
-          >
-
-            JavaScript
-
-          </span>
+            <h2
+              class="makeStyles-title-5"
+            >
+               
+              Teste
+               
+            </h2>
+            <div
+              class="makeStyles-info-4"
+            >
+              <span>
+                Feminino
+              </span>
+              <span>
+                 
+                Desenvolvedora
+                 
+              </span>
+              <span>
+                12
+                 meses 
+              </span>
+              <span>
+                Porto Alegre
+                /
+                RS
+              </span>
+              <div
+                class="makeStyles-skills-6"
+              >
+                <span
+                  class="label"
+                >
+                   
+                  MongoDB
+                   
+                </span>
+                <span
+                  class="label"
+                >
+                   
+                  JavaScript
+                   
+                </span>
+              </div>
+            </div>
+            <hr
+              class="makeStyles-line-7"
+            />
+            <div
+              class="makeStyles-socialLinks-8"
+            >
+              <a
+                class="social"
+                href="mailto:test@hotmail.com"
+                target="_blank"
+              >
+                <img
+                  alt="email link"
+                  src="test-file-stub"
+                />
+              </a>
+            </div>
+          </div>
         </div>
       </div>
-      <hr />
-      <div
-        class="socialLinks"
-      >
-        <a
-          class="social"
-          href="mailto:test@hotmail.com"
-          target="_blank"
-        >
-          <img
-            alt="email link"
-            src="test-file-stub"
-          />
-        </a>
-      </div>
     </div>
-
   </div>
 </div>
 `;

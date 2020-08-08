@@ -6,7 +6,10 @@ const api = axios.create({
 
 export const getAllProfiles = () => api.get("/profile")
 
+export const createProfile = (data) => api.post("/profile", data)
+
 const apis = {
+	createProfile,
 	getAllProfiles
 }
 

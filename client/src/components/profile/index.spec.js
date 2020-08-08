@@ -1,26 +1,25 @@
 import React from "react"
 import Profile from "."
-import { render, screen } from "../components/list/@testing-library/react"
+import { render, screen } from "@testing-library/react"
+import profileData from "../../../../__mocks__/profileData"
 
-const profileData = {
-	city: "Porto Alegre",
-	country: "Brasil",
-	experience: 12,
-	gender: "Feminino",
-	jobTitle: ["Desenvolvedora"],
-	name: "Teste",
-	skills: ["MongoDB", "JavaScript"],
-	socialLinks: {email: "test@hotmail.com"},
-	state: "RS"
-}
 describe("<Profile />", () => {
 	it("should render Profile with props", () => {
 		render(<Profile {...profileData} />)
 		expect(screen.getByText(profileData.name)).toBeInTheDocument()
 		expect(screen.getByText(profileData.city, { exact: false })).toBeInTheDocument()
-		expect(screen.getByText("12")).toBeInTheDocument()
+		expect(screen.getByText("12 meses", { exact: false })).toBeInTheDocument()
 		expect(screen.getByText(profileData.gender)).toBeInTheDocument()
 		expect(screen.getByText(profileData.jobTitle[0])).toBeInTheDocument()
 		expect(screen.getByText(profileData.state, { exact: false })).toBeInTheDocument()
+	})
+
+	it("should render Profile if there are no social links", () => {
+		const data = {
+			...profileData,
+			socialLinks: null
+		}
+		render(<Profile {...data} />)
+		expect(screen.getByText(profileData.name)).toBeInTheDocument()
 	})
 })

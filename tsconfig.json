@@ -1,16 +1,21 @@
 {
     "compilerOptions": {
-        "outDir": "./dist/",
-        "sourceMap": true,
-        "strictNullChecks": true,
-        "module": "ES2020",
-        "jsx": "react",
-        "target": "es5",
         "allowJs": true,
         "allowSyntheticDefaultImports": true,
-        "typeRoots": ["./node_modules/@types"]
+        "baseUrl": "./",
+        "esModuleInterop": true,
+        "jsx": "react",
+        "module": "commonjs",
+        "outDir": "./dist/client/",
+        "rootDirs": ["./"],
+        "sourceMap": true,
+        "strict": true,
+        "strictNullChecks": true,
+        "target": "es2019",
+        "typeRoots": ["./node_modules/@types", "./node_modules/react-hook-form"]
     },
     "include": [
-        "./client/src/"
-    ]
+        "./client/src/", "setuptests.ts"
+    ],
+    "exclude": ["node_modules"]
 }

@@ -1,11 +1,19 @@
 import React from "react"
 import "./menu.css"
 
-const menu = () => {
+type MenuProps = {
+    setToggle: Function,
+    toggle: boolean
+}
+
+const menu = ({setToggle, toggle}: MenuProps) => {
+    const setToggleRegisterHandler = () => {
+        setToggle(!toggle)
+    }
     return (
         <div className="menu"role="navigation">
             <span> AFROLINK</span>
-            <button> Cadastrar Perfil </button>
+            <button onClick={setToggleRegisterHandler}> Cadastrar Perfil </button>
         </div>
     )
 }

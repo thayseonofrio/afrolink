@@ -1,6 +1,11 @@
 import React from "react"
 import "./label.css"
-const label = ({text}) => {
+
+type LabelProps = {
+	text: string
+}
+
+const label = ({text}: LabelProps) => {
 	return (<span className="label"> {text} </span>)
 }
 

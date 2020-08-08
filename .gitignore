@@ -2,3 +2,5 @@ node_modules/
 dist/
 .vscode
 client/src/.DS_Store
+reports
+coverage

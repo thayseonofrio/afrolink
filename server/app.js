@@ -12,10 +12,6 @@ app.use(bodyParser.json())
 
 db.on("error", console.error.bind(console, "Error in MongoDB connection:"))
 
-app.get("/", (req, res) => {
-	res.send("Hello World!")
-})
-
 app.use("/api", router)
 
 // eslint-disable-next-line no-unused-vars

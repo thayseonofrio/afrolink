@@ -1,10 +1,14 @@
 import React from "react"
 
-const social = ({type, link}) => {
-	const getIconPath = (type) => require(`./../../assets/${type}.svg`)
+type SocialType = {
+	type: string,
+	value: string
+}
 
-	// TODO - change email link
+const social = ({type, value}: SocialType) => {
+	const getIconPath = (type: string) => require(`./../../assets/${type}.svg`)
 
+	const link = type == "email" ? `mailto:${value}` : value
 	return (
 		<a className="social" href={link} target="_blank">
 			{<img src={getIconPath(type)} alt={`${type} link`}/>}

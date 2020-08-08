@@ -53,14 +53,14 @@ module.exports = {
     extensions: [".ts", ".tsx", ".js", ".jsx"],
   },
   output: {
-    path: path.resolve(__dirname, "/dist/"),
+    path: path.resolve(__dirname, "dist/client/"),
     publicPath: "/dist/",
     filename: "bundle.js",
   },
   devServer: {
     contentBase: path.join(__dirname, "client/public/"),
     port: 3000,
-    publicPath: "http://localhost:3000/dist/",
+    publicPath: "http://localhost:3000/dist/client/",
     hotOnly: true,
   },
   devtool: "source-map",

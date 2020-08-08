@@ -1,19 +1,27 @@
-import React, { Component} from "react"
-import {hot} from "react-hot-loader"
-import "./App.css"
-import List from "./components/list"
-import Menu from "./components/menu"
-import Header from "./components/header"
-class App extends Component{
-	render(){
-		return(
-			<div className="App">
-				<Menu />
-				<Header />
-				<List/>
-			</div>
-		)
-	}
-}
+import React, { useState } from "react";
+import { hot } from "react-hot-loader";
+import "./App.css";
+import List from "./components/list";
+import Menu from "./components/menu";
+import Header from "./components/header";
+import Register from "./components/register";
 
-export default hot(module)(App)
+const App = () => {
+	const [toggleRegister, setToggleRegister] = useState(false)
+
+	const getPageToDisplay = () => {
+		if (toggleRegister) {
+			return <Register hideRegister={setToggleRegister}/>
+		}
+		return <List />
+	}
+	return (
+		<div className="App">
+			<Menu setToggle={setToggleRegister} toggle={toggleRegister}/>
+			<Header />
+			{getPageToDisplay()}
+		</div>
+	);
+};
+
+export default hot(module)(App);

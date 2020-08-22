@@ -1,3 +1,4 @@
 dist/
-client/public
-webpack.config.js
+public
+webpack.config.dev.js
+webpack.config.prod.js

@@ -1,5 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
   entry: "./src/index.tsx",
@@ -53,16 +54,16 @@ module.exports = {
     extensions: [".ts", ".tsx", ".js", ".jsx"],
   },
   output: {
-    path: path.resolve(__dirname, "dist/client/"),
+    path: path.resolve(__dirname, "dist/"),
     publicPath: "/dist/",
     filename: "bundle.js",
   },
   devServer: {
     contentBase: path.join(__dirname, "public/"),
     port: 3000,
-    publicPath: "http://localhost:3000/dist/client/",
+    publicPath: "http://localhost:3000/dist/",
     hotOnly: true,
   },
   devtool: "source-map",
-  plugins: [new webpack.HotModuleReplacementPlugin()],
+  plugins: [new CleanWebpackPlugin(), new webpack.HotModuleReplacementPlugin()],
 };

@@ -2,7 +2,7 @@ import React from "react"
 import apis from "../../services/profile"
 import List from "."
 import { render } from "@testing-library/react"
-import profileData from "../../../../__mocks__/profileData"
+import profileData from "../../../__mocks__/profileData"
 
 jest.mock("../../services/profile")
 

@@ -1,7 +1,7 @@
 import React from "react";
 import Label from "../label/index";
 import Social from "../social/index";
-import { ProfileType } from "client/src/types/profile";
+import { ProfileType } from "src/types/profile";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({

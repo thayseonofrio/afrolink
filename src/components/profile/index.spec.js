@@ -1,7 +1,7 @@
 import React from "react"
 import Profile from "."
 import { render, screen } from "@testing-library/react"
-import profileData from "../../../../__mocks__/profileData"
+import profileData from "../../../__mocks__/profileData"
 
 describe("<Profile />", () => {
 	it("should render Profile with props", () => {

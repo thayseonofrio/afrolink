@@ -8,11 +8,11 @@ import {
     ListItemText,
     Checkbox,
   } from "@material-ui/core";
-import jobTitles from "./../../../../../data/jobTitles"
+import languages from "./../../../../data/languages"
 
-type JobTitleProps = {
+type SkillsProps = {
     value: string[],
-    setJobTitle: Function
+    setSkill: Function
 }
 
 const ITEM_HEIGHT = 48;
@@ -26,32 +26,32 @@ const MenuProps = {
   },
 };
 
-const jobTitle = ({value, setJobTitle}: JobTitleProps) => {
+const skill = ({value, setSkill}: SkillsProps) => {
 
-    const handleJobTitleChange = (
+    const handleSkillChange = (
         event: React.ChangeEvent<{ value: unknown }>
       ) => {
-        setJobTitle(event.target.value as string[]);
+        setSkill(event.target.value as string[]);
       };
 
 
     return(
         <FormControl>
-        <InputLabel id="job-title-label">Profissão</InputLabel>
+        <InputLabel id="skills-label">Habilidades</InputLabel>
         <Select
-          labelId="job-title-label"
-          id="job-title"
+          labelId="skills-label"
+          id="skills"
           multiple
           value={value}
-          onChange={handleJobTitleChange}
+          onChange={handleSkillChange}
           input={<Input />}
           renderValue={(selected) => (selected as string[]).join(", ")}
           MenuProps={MenuProps}
         >
-          {jobTitles.map((job) => (
-            <MenuItem key={job} value={job}>
-              <Checkbox checked={value.indexOf(job) > -1} />
-              <ListItemText primary={job} />
+          {languages.map((skill) => (
+            <MenuItem key={skill} value={skill}>
+              <Checkbox checked={value.indexOf(skill) > -1} />
+              <ListItemText primary={skill} />
             </MenuItem>
           ))}
         </Select>
@@ -59,4 +59,4 @@ const jobTitle = ({value, setJobTitle}: JobTitleProps) => {
     )
 }
 
-export default jobTitle
+export default skill

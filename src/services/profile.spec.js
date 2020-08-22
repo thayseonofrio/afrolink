@@ -1,6 +1,6 @@
 import mockAxios from "jest-mock-axios"
 import apis from "./profile"
-import profileData from "../../../__mocks__/profileData"
+import profileData from "../../__mocks__/profileData"
 describe("Profile Service", () => {
 	const thenFn = jest.fn()
 

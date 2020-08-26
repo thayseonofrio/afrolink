@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "engines": {
     "node": "10.17.0"
- },
+  },
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -28,11 +28,11 @@
     "axios": "^0.19.2",
     "express": "^4.17.1",
     "express-favicon": "^2.0.1",
+    "formik": "^2.1.5",
     "lodash": "^4.17.19",
     "path": "^0.12.7",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
-    "react-hook-form": "^6.0.8",
     "react-hot-loader": "^4.3.11"
   },
   "devDependencies": {

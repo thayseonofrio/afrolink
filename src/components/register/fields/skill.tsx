@@ -12,7 +12,8 @@ import languages from "./../../../../data/languages"
 
 type SkillsProps = {
     value: string[],
-    setSkill: Function
+    onChange: any,
+    onBlur: any
 }
 
 const ITEM_HEIGHT = 48;
@@ -26,24 +27,18 @@ const MenuProps = {
   },
 };
 
-const skill = ({value, setSkill}: SkillsProps) => {
-
-    const handleSkillChange = (
-        event: React.ChangeEvent<{ value: unknown }>
-      ) => {
-        setSkill(event.target.value as string[]);
-      };
-
-
+const skill = ({value, onChange, onBlur}: SkillsProps) => {
     return(
         <FormControl>
         <InputLabel id="skills-label">Habilidades</InputLabel>
         <Select
           labelId="skills-label"
           id="skills"
+          name="skills"
           multiple
           value={value}
-          onChange={handleSkillChange}
+          onChange={onChange}
+          onBlur={onBlur}
           input={<Input />}
           renderValue={(selected) => (selected as string[]).join(", ")}
           MenuProps={MenuProps}

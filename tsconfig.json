@@ -12,7 +12,7 @@
         "strict": true,
         "strictNullChecks": true,
         "target": "es2019",
-        "typeRoots": ["./node_modules/@types", "./node_modules/react-hook-form"]
+        "typeRoots": ["./node_modules/@types"]
     },
     "include": [
         "./src/", "setuptests.ts"

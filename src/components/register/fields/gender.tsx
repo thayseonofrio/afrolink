@@ -1,40 +1,36 @@
 import React from "react";
-import { TextField, MenuItem } from "@material-ui/core";
+import { Select, MenuItem, InputLabel } from "@material-ui/core";
 
 type GenderProps = {
   value: string;
-  setGender: Function;
-  inputRef: any;
+  onChange: any;
+  onBlur: any;
 };
 
-const gender = ({ value, setGender, inputRef }: GenderProps) => {
-  const handleGenderSelection = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setGender(event.target.value);
-  };
-
+const gender = ({ value, onChange, onBlur }: GenderProps) => {
   return (
-    <TextField
-      id="gender"
-      select
-      inputRef={inputRef}
-      name="gender"
-      label="Gênero"
-      value={value}
-      onChange={handleGenderSelection}
-      helperText="Selecione seu Gênero"
-    >
-      <MenuItem key="female" value="female">
-        Feminino
-      </MenuItem>
-      <MenuItem key="male" value="male">
-        Masculino
-      </MenuItem>
-      <MenuItem key="other" value="other">
-        Outro
-      </MenuItem>
-    </TextField>
+    <>
+      <InputLabel id="gender-input-label">Selecione seu gênero</InputLabel>
+      <Select
+        labelId="gender-input-label"
+        id="gender"
+        name="gender"
+        label="Gênero"
+        value={value}
+        onChange={onChange}
+        onBlur={onBlur}
+      >
+        <MenuItem key="female" value="female">
+          Feminino
+        </MenuItem>
+        <MenuItem key="male" value="male">
+          Masculino
+        </MenuItem>
+        <MenuItem key="other" value="other">
+          Outro
+        </MenuItem>
+      </Select>
+    </>
   );
 };
 

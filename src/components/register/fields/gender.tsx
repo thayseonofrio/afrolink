@@ -20,13 +20,13 @@ const gender = ({ value, onChange, onBlur }: GenderProps) => {
         onChange={onChange}
         onBlur={onBlur}
       >
-        <MenuItem key="female" value="female">
+        <MenuItem key="female" value="feminino">
           Feminino
         </MenuItem>
-        <MenuItem key="male" value="male">
+        <MenuItem key="male" value="masculino">
           Masculino
         </MenuItem>
-        <MenuItem key="other" value="other">
+        <MenuItem key="other" value="outro">
           Outro
         </MenuItem>
       </Select>

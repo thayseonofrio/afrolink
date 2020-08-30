@@ -1,4 +1,4 @@
-const jobTitles = [
+const jobs = [
 	"Analista de Infraestrutura",
 	"Analista de Negócios",
 	"Analista de Qualidade",
@@ -9,4 +9,4 @@ const jobTitles = [
 	"Suporte Técnico",
 ]
 
-export default jobTitles
+export default jobs

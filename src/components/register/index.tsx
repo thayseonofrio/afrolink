@@ -1,14 +1,14 @@
 import React from "react";
-import { ProfileType } from "src/types/profile";
 import { TextField, Button } from "@material-ui/core";
 import Gender from "./fields/gender";
-import JobTitle from "./fields/jobTitle";
 import Skill from "./fields/skill";
+import Job from "./fields/job";
 import State from "./fields/state";
 import City from "./fields/city";
 import apis from "./../../services/profile";
 import { makeStyles } from "@material-ui/core/styles";
 import { Formik } from "formik";
+import * as Yup from 'yup';
 
 type SocialLinksType = {
   email: string;
@@ -31,58 +31,76 @@ const useStyles = makeStyles({
   },
 });
 
+const REQUIRED_FIELD = "Campo obrigatório"
+
+const ProfileSchema = Yup.object().shape({
+  name: Yup.string()
+    .min(2, 'Nome muito curto')
+    .max(200, 'Limite excedido')
+    .required(REQUIRED_FIELD),
+  gender: Yup.string()
+    .required(REQUIRED_FIELD),
+  email: Yup.string()
+    .email('E-mail inválido')
+    .required(REQUIRED_FIELD),
+  experience: Yup.number()
+    .required(REQUIRED_FIELD),
+  skills: Yup.array()
+    .required(REQUIRED_FIELD),
+  jobs: Yup.array()
+    .required(REQUIRED_FIELD),
+  site: Yup.string()
+    .notRequired(),
+    linkedin: Yup.string()
+    .notRequired(),
+    github: Yup.string()
+    .notRequired(),
+    country: Yup.string()
+    .required(REQUIRED_FIELD),
+    state: Yup.string()
+    .required(REQUIRED_FIELD),
+    city: Yup.string()
+    .required(REQUIRED_FIELD),
+});
+
 const register = ({ hideRegister }: RegisterProps) => {
   const classes = useStyles();
 
-  const onSubmit: any = (
-    props: any,
-    setSubmitting: (value: boolean) => void
-    //   {
-    //   name,
-    //   experience,
-    //   email,
-    //   site,
-    //   github,
-    //   linkedin,
-    //   country,
-    // }
+  const onSubmit = (
+      values: any,
+    setSubmitting: (value: boolean) => void,
+    setFieldError: (field: string, error: string) => void
   ) => {
     setSubmitting(true);
+    const {name, gender, experience, skills, jobs, email, site, linkedin, github, country, state, city }  = values
+    const socialLinks: SocialLinksType = {
+      email,
+      site,
+      github,
+      linkedin,
+    };
+    apis
+      .createProfile({
+        name,
+        experience,
+        city,
+        skills,
+        socialLinks,
+        state,
+        country,
+        gender,
+        jobTitle: jobs,
+      })
+      .then(() => {
+        hideRegister(false);
+        setSubmitting(false);
 
-    // const socialLinks = {
-    //   email,
-    //   site,
-    //   github,
-    //   linkedin,
-    // };
-    console.log(props);
-    // apis
-    //   .createProfile({
-    //     name,
-    //     experience,
-    //     city: cityInput,
-    //     skills,
-    //     socialLinks,
-    //     state: stateInput,
-    //     country,
-    //     gender,
-    //     jobTitle,
-    //   })
-    //   .then(() => {
-    //     hideRegister(false);
-    //     setSubmitting(false);
-
-    //   })
-    //   .catch(() => {
-    //     setFormError(true);
-    //     setSubmitting(false);
-
-    //   });
+      })
+      .catch(() => {
+        setFieldError('general', "Ocorreu um erro ao cadastrar o perfil. Tente novamente.")
+        setSubmitting(false);
+      });
   };
-
-  // const errorMessage = formError ? (
-  //   <span> Ocorreu um erro ao cadastrar o perfil. Tente novamente. </span>
-  // ) : null;
 
   return (
     <div className="register">
@@ -96,24 +114,15 @@ const register = ({ hideRegister }: RegisterProps) => {
           github: "",
           linkedin: "",
           country: "Brasil",
-          jobTitle: [],
+          jobs: [],
           skills: [],
           city: "",
-          state: ""
+          state: "",
+          general: ""
         }}
-        validate={(values) => {
-          const errors: any = {};
-          if (!values.email) {
-            errors.email = "Required";
-          } else if (
-            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-          ) {
-            errors.email = "Invalid email address";
-          }
-          return errors;
-        }}
-        onSubmit={(values, { setSubmitting }) => {
-          onSubmit(values, setSubmitting);
+        validationSchema={ProfileSchema}
+        onSubmit={(values, { setSubmitting,  setFieldError}) => {
+          onSubmit(values, setSubmitting, setFieldError);
         }}
       >
         {({
@@ -124,7 +133,6 @@ const register = ({ hideRegister }: RegisterProps) => {
           handleBlur,
           handleSubmit,
           isSubmitting,
-          /* and other goodies */
         }) => (
           <form className={classes.form} onSubmit={handleSubmit}>
             <TextField
@@ -136,17 +144,14 @@ const register = ({ hideRegister }: RegisterProps) => {
               value={values.name}
             />
 
+            {errors.name && touched.name && errors.name}
+
             <Gender
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.gender}
             />
-
-            <JobTitle
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.jobTitle}
-            />
+            {errors.gender && touched.gender && errors.gender}
 
             <TextField
               id="experienceInput"
@@ -157,12 +162,23 @@ const register = ({ hideRegister }: RegisterProps) => {
               onBlur={handleBlur}
               value={values.experience}
             />
+            {errors.experience && touched.experience && errors.experience}
 
             <Skill
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.skills}
             />
+
+            {errors.skills && touched.skills && errors.skills}
+
+            <Job
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.jobs}
+            />
+
+            {errors.jobs && touched.jobs && errors.jobs}
 
             <TextField
               id="emailInput"
@@ -183,6 +199,9 @@ const register = ({ hideRegister }: RegisterProps) => {
               onBlur={handleBlur}
               value={values.site}
             />
+
+            {errors.site && touched.site && errors.site}
+
             <TextField
               id="githubInput"
               name="github"
@@ -191,6 +210,9 @@ const register = ({ hideRegister }: RegisterProps) => {
               onBlur={handleBlur}
               value={values.github}
             />
+
+            {errors.github && touched.github && errors.github}
+
             <TextField
               id="linkedinInput"
               name="linkedin"
@@ -199,6 +221,8 @@ const register = ({ hideRegister }: RegisterProps) => {
               onBlur={handleBlur}
               value={values.linkedin}
             />
+
+            {errors.linkedin && touched.linkedin && errors.linkedin}
 
             <TextField
               id="countryInput"
@@ -211,6 +235,7 @@ const register = ({ hideRegister }: RegisterProps) => {
               onBlur={handleBlur}
               value={values.country}
             />
+            {errors.country && touched.country && errors.country}
 
             <State
               onChange={handleChange}
@@ -218,19 +243,25 @@ const register = ({ hideRegister }: RegisterProps) => {
               value={values.state}
             />
 
+            {errors.state && touched.state && errors.state}
+
             {values.state ? (
+              <>
               <City
                 onChange={handleChange}
                 onBlur={handleBlur}
                 stateValue={values.state}
                 value={values.city}
               />
+              {errors.city && touched.city && errors.city}
+              </>
             ) : null}
 
             <Button type="submit" disabled={isSubmitting}>
               Enviar
             </Button>
 
+            {errors.general}
           </form>
         )}
       </Formik>

@@ -10,7 +10,7 @@ describe("<Social />", () => {
 	})
 	it("should render other types with link", () => {
 		const { getByRole } = render(<Social type="github" value="github.com"/>)
-		expect(getByRole("link")).toHaveAttribute("href", "github.com")
+		expect(getByRole("link")).toHaveAttribute("href", "https://github.com")
 		expect(getByRole("img")).toHaveAttribute("alt", "github link")
 	})
 })

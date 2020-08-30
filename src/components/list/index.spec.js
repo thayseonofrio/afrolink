@@ -12,7 +12,7 @@ describe("<List />", () => {
 		apis.getAllProfiles.mockImplementationOnce(() => Promise.resolve(response))
 		const { container, findByText} = render(<List />)
 		expect( await findByText("Desenvolvedora")).toBeInTheDocument()
-		expect( await findByText("Feminino")).toBeInTheDocument()
+		expect( await findByText("Feminino", { exact: false})).toBeInTheDocument()
 		expect( await findByText("Teste")).toBeInTheDocument()
 		expect(container).toMatchSnapshot()
 	})

@@ -46,6 +46,22 @@ const useStyles = makeStyles({
   }
 });
 
+export const getExperience = (experience: number) => {
+  if (experience === 0) {
+    return null
+  }
+  const years = Math.floor(experience/12)
+  const months = experience % 12
+  let result = ""
+  if (years > 0) {
+    result += years > 1 ? `${years} anos ` : `${years} ano `
+  }
+  if (months > 0) {
+    result += months > 1 ? `${months} meses ` : `${months} mês `
+  }
+  return result
+}
+
 const profile = (props: ProfileType) => {
   const {
     name,
@@ -75,15 +91,16 @@ const profile = (props: ProfileType) => {
       return <Social key={type} type={type} value={link} />;
     });
   };
+
   return (
     <div className={classes.root}>
       <h2 className={classes.title}> {name} </h2>
       <div className={classes.info}>
-        <span>{gender}</span>
-        {getJobTitles()}
-        <span>{experience} meses </span>
+      {getJobTitles()}
+        <span>Gênero: {gender}</span>
+        <span>Tempo de experiência: {getExperience(experience)} </span>
         <span>
-          {city}/{state}
+          Local: {city}/{state}
         </span>
         <div className={classes.skills}>{getSkills()}</div>
       </div>

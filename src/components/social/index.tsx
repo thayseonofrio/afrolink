@@ -7,8 +7,10 @@ type SocialType = {
 
 const social = ({type, value}: SocialType) => {
 	const getIconPath = (type: string) => require(`./../../assets/${type}.svg`)
-
-	const link = type == "email" ? `mailto:${value}` : value
+	if (!value) {
+		return null
+	}
+	const link = type == "email" ? `mailto:${value}` : `https://${value}`
 	return (
 		<a className="social" href={link} target="_blank">
 			{<img src={getIconPath(type)} alt={`${type} link`}/>}

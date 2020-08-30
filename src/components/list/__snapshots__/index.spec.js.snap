@@ -28,18 +28,21 @@ exports[`<List /> should render list with profile 1`] = `
               class="makeStyles-info-4"
             >
               <span>
-                Feminino
-              </span>
-              <span>
                  
                 Desenvolvedora
                  
               </span>
               <span>
-                12
-                 meses 
+                Gênero: 
+                Feminino
               </span>
               <span>
+                Tempo de experiência: 
+                1 ano 
+                 
+              </span>
+              <span>
+                Local: 
                 Porto Alegre
                 /
                 RS

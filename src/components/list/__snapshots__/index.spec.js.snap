@@ -3,6 +3,41 @@
 exports[`<List /> should render list with profile 1`] = `
 <div>
   <div
+    class="makeStyles-filters-3"
+  >
+    <div
+      class="MuiInputBase-root MuiInput-root MuiInput-underline"
+    >
+      <div
+        aria-haspopup="listbox"
+        aria-labelledby="gender-input-label gender"
+        class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input"
+        id="gender"
+        role="button"
+        tabindex="0"
+      >
+        Gênero
+      </div>
+      <input
+        aria-hidden="true"
+        class="MuiSelect-nativeInput"
+        name="gender"
+        tabindex="-1"
+        value="default"
+      />
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSelect-icon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M7 10l5 5 5-5z"
+        />
+      </svg>
+    </div>
+  </div>
+  <div
     class="makeStyles-root-1"
   >
     <div
@@ -15,17 +50,17 @@ exports[`<List /> should render list with profile 1`] = `
           class="MuiPaper-root makeStyles-paper-2 MuiPaper-elevation1 MuiPaper-rounded"
         >
           <div
-            class="makeStyles-root-3"
+            class="makeStyles-root-4"
           >
             <h2
-              class="makeStyles-title-5"
+              class="makeStyles-title-6"
             >
                
               Teste
                
             </h2>
             <div
-              class="makeStyles-info-4"
+              class="makeStyles-info-5"
             >
               <span>
                  
@@ -34,7 +69,7 @@ exports[`<List /> should render list with profile 1`] = `
               </span>
               <span>
                 Gênero: 
-                Feminino
+                feminino
               </span>
               <span>
                 Tempo de experiência: 
@@ -48,7 +83,7 @@ exports[`<List /> should render list with profile 1`] = `
                 RS
               </span>
               <div
-                class="makeStyles-skills-6"
+                class="makeStyles-skills-7"
               >
                 <span
                   class="label"
@@ -67,10 +102,10 @@ exports[`<List /> should render list with profile 1`] = `
               </div>
             </div>
             <hr
-              class="makeStyles-line-7"
+              class="makeStyles-line-8"
             />
             <div
-              class="makeStyles-socialLinks-8"
+              class="makeStyles-socialLinks-9"
             >
               <a
                 class="social"

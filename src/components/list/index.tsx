@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import apis from "../../services/profile";
 import Profile from "../profile/index";
 import { ProfileType } from "../../types/profile";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
+import { Grid, Paper } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import GenderFilter from "./genderFilter";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -16,19 +16,58 @@ const useStyles = makeStyles((theme: Theme) =>
       textAlign: "center",
       color: theme.palette.text.secondary,
     },
+    filters: {
+      display: "flex",
+      width: "100%",
+      padding: "0.5em",
+      marginBottom: "3em",
+      justifyContent: "center",
+    },
   })
 );
 
+export const getFilteredProfilesByGender = (
+  profiles: ProfileType[] = [],
+  filteredGender: string = ""
+) => {
+  const filteredProfiles = Object.entries(profiles)?.filter(
+    ([key, profile]) => profile.gender === filteredGender
+  );
+  return filteredProfiles.map(([key, value]) => value);
+};
+
 const list = () => {
   const [profiles, setProfiles] = useState<ProfileType[]>();
+  const [unfilteredProfiles, setUnfilteredProfiles] = useState<ProfileType[]>();
+  const [filteredGender, setFilteredGender] = useState<string>("default");
   const classes = useStyles();
 
   useEffect(() => {
     apis.getAllProfiles().then((response) => {
       const { data } = response;
       setProfiles(data);
+      setUnfilteredProfiles(data);
     });
   }, []);
+
+  useEffect(() => {
+    if (filteredGender && filteredGender !== "default") {
+      const filteredProfiles = getFilteredProfilesByGender(
+        unfilteredProfiles,
+        filteredGender
+      );
+      setProfiles(filteredProfiles);
+    } else {
+      setProfiles(unfilteredProfiles);
+    }
+  }, [filteredGender]);
+
+  const handleFilteredGender = (
+    event: React.ChangeEvent<{ name?: string; value: unknown }>
+  ) => {
+    const value = event.target.value as string;
+    setFilteredGender(value);
+  };
 
   const getProfiles = () => {
     if (profiles) {
@@ -45,11 +84,16 @@ const list = () => {
     return null;
   };
   return (
-    <div className={classes.root}>
-      <Grid container spacing={3}>
-        {getProfiles()}
-      </Grid>
-    </div>
+    <>
+      <div className={classes.filters}>
+        <GenderFilter onChange={handleFilteredGender} value={filteredGender} />
+      </div>
+      <div className={classes.root}>
+        <Grid container spacing={3}>
+          {getProfiles()}
+        </Grid>
+      </div>
+    </>
   );
 };
 

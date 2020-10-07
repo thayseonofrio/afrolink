@@ -24,6 +24,9 @@ describe("<Profile />", () => {
 	})
 
 	describe("Experience", () => {
+		it("should be null given there is 0 experience", () => {
+			expect(getExperience(0)).toBeNull()
+		})
 		it("should convert 12 months into one year", () => {
 			expect(getExperience(12)).toBe("1 ano ")
 		})

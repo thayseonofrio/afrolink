@@ -13,4 +13,9 @@ describe("<Social />", () => {
 		expect(getByRole("link")).toHaveAttribute("href", "https://github.com")
 		expect(getByRole("img")).toHaveAttribute("alt", "github link")
 	})
+
+	it("should not render given there is no value", () => {
+		const {container} = render(<Social type="github"/>)
+		expect(container.innerHTML).toBe("")
+	})
 })

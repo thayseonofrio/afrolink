@@ -5,7 +5,7 @@ module.exports = {
 		"dist/",
 		"server/app.js"
 	],
-	coverageReporters: ["lcov", "text"],
+	coverageReporters: ["lcov", "text", "text-summary"],
 	coverageThreshold: {
 		global: {
 			statements: 80,

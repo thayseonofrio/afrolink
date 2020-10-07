@@ -1,7 +1,7 @@
 import React from "react"
 import apis from "../../services/profile"
 import List from "."
-import { render } from "@testing-library/react"
+import { fireEvent, render } from "@testing-library/react"
 import profileData from "../../../__mocks__/profileData"
 import {getFilteredProfilesByGender} from "."
 
@@ -34,5 +34,19 @@ describe("<List />", () => {
 		const filteredProfiles = getFilteredProfilesByGender(initialProfiles, "feminino")
 		expect(filteredProfiles).toHaveLength(1)
 		expect(filteredProfiles[0].gender).toBe("feminino")
+	})
+
+	it("should return empty if no profiles are given", async () => {
+		const filteredProfiles = getFilteredProfilesByGender()
+		expect(filteredProfiles).toHaveLength(0)
+	})
+
+	it("should filter by selected option", async () => {
+		const {getByRole, findByRole, findAllByText} = render(<List />)
+		const selectGender = getByRole("button", { name: /gênero/i })
+		fireEvent.keyDown(selectGender, { keyCode: 40 })
+		const option = await findByRole("option", { name: /feminino/i })
+		fireEvent.click(option)
+		expect(await findAllByText(/gênero: feminino/i)).toHaveLength(1)
 	})
 })

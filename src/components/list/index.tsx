@@ -5,6 +5,7 @@ import { ProfileType } from "../../types/profile";
 import { Grid, Paper } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import GenderFilter from "./genderFilter";
+import StateFilter from "./stateFilter";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,24 +24,42 @@ const useStyles = makeStyles((theme: Theme) =>
       marginBottom: "3em",
       justifyContent: "center",
     },
+    filtersInput: {
+      margin: "0 1em"
+    }
   })
 );
 
-export const getFilteredProfilesByGender = (
+export const getFilteredProfiles = (
   profiles: ProfileType[] = [],
-  filteredGender: string = ""
+  filteredGender?: string,
+  filteredState?: string
 ) => {
-  const filteredProfiles = Object.entries(profiles)?.filter(
-    ([key, profile]) => profile.gender === filteredGender
-  );
-  return filteredProfiles.map(([key, value]) => value);
+  return Object.entries(profiles)
+    ?.filter(([key, profile]) => {
+      if (filteredGender && filteredGender !== "default") {
+        return profile.gender === filteredGender
+      };
+      return true;
+    })
+    .filter(([key, profile]) => {
+      if (filteredState && filteredState !== "default") {
+        return profile.state === filteredState
+      };
+      return true;
+    })
+    .map(([key, value]) => value);
 };
 
 const list = () => {
   const [profiles, setProfiles] = useState<ProfileType[]>();
   const [unfilteredProfiles, setUnfilteredProfiles] = useState<ProfileType[]>();
   const [filteredGender, setFilteredGender] = useState<string>("default");
+  const [filteredState, setFilteredState] = useState<string>("default");
   const classes = useStyles();
+
+  const isGenderedFiltered = filteredGender && filteredGender !== "default";
+  const isStateFiltered = filteredState && filteredState !== "default";
 
   useEffect(() => {
     apis.getAllProfiles().then((response) => {
@@ -51,22 +70,30 @@ const list = () => {
   }, []);
 
   useEffect(() => {
-    if (filteredGender && filteredGender !== "default") {
-      const filteredProfiles = getFilteredProfilesByGender(
+    if (isGenderedFiltered || isStateFiltered) {
+      const filteredProfiles = getFilteredProfiles(
         unfilteredProfiles,
-        filteredGender
+        filteredGender,
+        filteredState
       );
       setProfiles(filteredProfiles);
     } else {
       setProfiles(unfilteredProfiles);
     }
-  }, [filteredGender]);
+  }, [filteredGender, filteredState]);
 
   const handleFilteredGender = (
     event: React.ChangeEvent<{ name?: string; value: unknown }>
   ) => {
     const value = event.target.value as string;
     setFilteredGender(value);
+  };
+
+  const handleFilteredState = (
+    event: React.ChangeEvent<{ name?: string; value: unknown }>
+  ) => {
+    const value = event.target.value as string;
+    setFilteredState(value);
   };
 
   const getProfiles = () => {
@@ -86,7 +113,8 @@ const list = () => {
   return (
     <>
       <div className={classes.filters}>
-        <GenderFilter onChange={handleFilteredGender} value={filteredGender} />
+        <GenderFilter className={classes.filtersInput} onChange={handleFilteredGender} value={filteredGender} />
+        <StateFilter className={classes.filtersInput} onChange={handleFilteredState} value={filteredState} />
       </div>
       <div className={classes.root}>
         <Grid container spacing={3}>

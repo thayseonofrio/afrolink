@@ -3,7 +3,7 @@ import apis from "../../services/profile"
 import List from "."
 import { fireEvent, render } from "@testing-library/react"
 import profileData from "../../../__mocks__/profileData"
-import {getFilteredProfilesByGender} from "."
+import {getFilteredProfiles} from "."
 
 jest.mock("../../services/profile")
 
@@ -31,22 +31,64 @@ describe("<List />", () => {
 			name: "outra pessoa"
 		}
 		const initialProfiles = [...response.data, secondProfile, thirdProfile]
-		const filteredProfiles = getFilteredProfilesByGender(initialProfiles, "feminino")
+		const filteredProfiles = getFilteredProfiles(initialProfiles, "feminino")
 		expect(filteredProfiles).toHaveLength(1)
 		expect(filteredProfiles[0].gender).toBe("feminino")
 	})
 
+	it("should return filtered profiles by state", async () => {
+		const secondProfile = {
+			...response.data,
+			gender: "masculino",
+			state: "RS"
+		}
+		const thirdProfile = {
+			...secondProfile,
+			gender: "feminino",
+			state: "RJ"
+		}
+		const initialProfiles = [...response.data, secondProfile, thirdProfile]
+		const filteredProfiles = getFilteredProfiles(initialProfiles, "masculino", "RS")
+		expect(filteredProfiles).toHaveLength(1)
+		expect(filteredProfiles[0].gender).toBe("masculino")
+		expect(filteredProfiles[0].state).toBe("RS")
+	})
+
+	it("should return filtered profiles by gender and state", async () => {
+		const secondProfile = {
+			...response.data,
+			state: "RS"
+		}
+		const thirdProfile = {
+			...secondProfile,
+			state: "RJ"
+		}
+		const initialProfiles = [...response.data, secondProfile, thirdProfile]
+		const filteredProfiles = getFilteredProfiles(initialProfiles, null, "RS")
+		expect(filteredProfiles).toHaveLength(2)
+		expect(filteredProfiles[0].state).toBe("RS")
+	})
+
 	it("should return empty if no profiles are given", async () => {
-		const filteredProfiles = getFilteredProfilesByGender()
+		const filteredProfiles = getFilteredProfiles()
 		expect(filteredProfiles).toHaveLength(0)
 	})
 
-	it("should filter by selected option", async () => {
+	it("should filter by selected gender option", async () => {
 		const {getByRole, findByRole, findAllByText} = render(<List />)
 		const selectGender = getByRole("button", { name: /gênero/i })
 		fireEvent.keyDown(selectGender, { keyCode: 40 })
 		const option = await findByRole("option", { name: /feminino/i })
 		fireEvent.click(option)
 		expect(await findAllByText(/gênero: feminino/i)).toHaveLength(1)
+	})
+
+	it("should filter by selected state option", async () => {
+		const {getByRole, findByRole, findAllByText} = render(<List />)
+		const selectState = getByRole("button", { name: /estado/i })
+		fireEvent.keyDown(selectState, { keyCode: 40 })
+		const option = await findByRole("option", { name: /Rio Grande do Sul/i })
+		fireEvent.click(option)
+		expect(await findAllByText(/RS/i)).toHaveLength(1)
 	})
 })

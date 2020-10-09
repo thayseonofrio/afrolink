@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { InputLabel, Select, MenuItem } from "@material-ui/core";
-import { getAllStates } from "./../../../services/location";
 import sortBy from "lodash/sortBy";
 
 type StateProps = {
@@ -9,22 +8,20 @@ type StateProps = {
   onBlur: any;
 };
 
-type State = {
+export type State = {
   id: number;
   sigla: string;
   nome: string;
 };
 
+const states = require("../../../data/states.json")
+
 const state = ({ value, onChange, onBlur }: StateProps) => {
   const [stateList, setStateList] = useState<State[]>([]);
 
   useEffect(() => {
-    getAllStates()
-      .then((response) => {
-        const state = sortBy(response.data, (state) => state.nome);
-        setStateList(state);
-      })
-      .catch((err) => console.log(err));
+    const state = sortBy(states, (state) => state.nome);
+    setStateList(state);
   }, []);
 
   return (

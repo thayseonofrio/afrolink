@@ -6,13 +6,13 @@ exports[`<List /> should render list with profile 1`] = `
     class="makeStyles-filters-3"
   >
     <div
-      class="MuiInputBase-root MuiInput-root MuiInput-underline"
+      class="MuiInputBase-root MuiInput-root MuiInput-underline makeStyles-filtersInput-4"
     >
       <div
         aria-haspopup="listbox"
-        aria-labelledby="gender-input-label gender"
+        aria-labelledby="gender-filter-input-label gender-filter"
         class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input"
-        id="gender"
+        id="gender-filter"
         role="button"
         tabindex="0"
       >
@@ -21,7 +21,38 @@ exports[`<List /> should render list with profile 1`] = `
       <input
         aria-hidden="true"
         class="MuiSelect-nativeInput"
-        name="gender"
+        name="gender-filter"
+        tabindex="-1"
+        value="default"
+      />
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSelect-icon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M7 10l5 5 5-5z"
+        />
+      </svg>
+    </div>
+    <div
+      class="MuiInputBase-root MuiInput-root MuiInput-underline makeStyles-filtersInput-4"
+    >
+      <div
+        aria-haspopup="listbox"
+        aria-labelledby="state-filter-input-label state-filter"
+        class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input"
+        id="state-filter"
+        role="button"
+        tabindex="0"
+      >
+        Estado
+      </div>
+      <input
+        aria-hidden="true"
+        class="MuiSelect-nativeInput"
+        name="state-filter"
         tabindex="-1"
         value="default"
       />
@@ -50,17 +81,17 @@ exports[`<List /> should render list with profile 1`] = `
           class="MuiPaper-root makeStyles-paper-2 MuiPaper-elevation1 MuiPaper-rounded"
         >
           <div
-            class="makeStyles-root-4"
+            class="makeStyles-root-5"
           >
             <h2
-              class="makeStyles-title-6"
+              class="makeStyles-title-7"
             >
                
               Teste
                
             </h2>
             <div
-              class="makeStyles-info-5"
+              class="makeStyles-info-6"
             >
               <span>
                  
@@ -83,7 +114,7 @@ exports[`<List /> should render list with profile 1`] = `
                 RS
               </span>
               <div
-                class="makeStyles-skills-7"
+                class="makeStyles-skills-8"
               >
                 <span
                   class="label"
@@ -102,10 +133,10 @@ exports[`<List /> should render list with profile 1`] = `
               </div>
             </div>
             <hr
-              class="makeStyles-line-8"
+              class="makeStyles-line-9"
             />
             <div
-              class="makeStyles-socialLinks-9"
+              class="makeStyles-socialLinks-10"
             >
               <a
                 class="social"

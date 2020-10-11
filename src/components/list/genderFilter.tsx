@@ -2,15 +2,17 @@ import React from "react";
 import {Select, MenuItem} from "@material-ui/core";
 
 type GenderFilterProps = {
-    onChange: any
-    value: unknown
+  className: string,
+  onChange: any
+  value: unknown
 }
-const genderFilter = ({onChange, value}: GenderFilterProps) => {
+const genderFilter = ({className, onChange, value}: GenderFilterProps) => {
   return (
     <Select
-      labelId="gender-input-label"
-      id="gender"
-      name="gender"
+      labelId="gender-filter-input-label"
+      id="gender-filter"
+      name="gender-filter"
+      className={className}
       label="Gênero"
       value={value}
       onChange={onChange}

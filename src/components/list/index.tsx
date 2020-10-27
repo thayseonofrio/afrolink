@@ -6,6 +6,7 @@ import { Grid, Paper } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import GenderFilter from "./genderFilter";
 import StateFilter from "./stateFilter";
+import SkillsFilter from "./skillsFilter";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -30,21 +31,37 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+const INITIAL_SKILLS_VALUE = "Habilidades";
+
+const isSkillsFiltered = (filteredSkills: string[]) => filteredSkills && filteredSkills.length > 0 && filteredSkills[0] !== INITIAL_SKILLS_VALUE
+
+const isStateFiltered = (filteredState: string) => filteredState && filteredState !== "default"
+
+const isGenderedFiltered = (filteredGender: string) => filteredGender && filteredGender !== "default"
+
+
 export const getFilteredProfiles = (
   profiles: ProfileType[] = [],
   filteredGender?: string,
-  filteredState?: string
+  filteredState?: string,
+  filteredSkills?: string[]
 ) => {
   return Object.entries(profiles)
     ?.filter(([key, profile]) => {
-      if (filteredGender && filteredGender !== "default") {
+      if (filteredGender && isGenderedFiltered(filteredGender)) {
         return profile.gender === filteredGender
       };
       return true;
     })
     .filter(([key, profile]) => {
-      if (filteredState && filteredState !== "default") {
+      if (filteredState && isStateFiltered(filteredState)) {
         return profile.state === filteredState
+      };
+      return true;
+    })
+    .filter(([key, profile]) => {
+      if (filteredSkills && isSkillsFiltered(filteredSkills)) {
+        return filteredSkills.every(skill => profile.skills.includes(skill))
       };
       return true;
     })
@@ -56,10 +73,8 @@ const list = () => {
   const [unfilteredProfiles, setUnfilteredProfiles] = useState<ProfileType[]>();
   const [filteredGender, setFilteredGender] = useState<string>("default");
   const [filteredState, setFilteredState] = useState<string>("default");
+  const [filteredSkills, setFilteredSkills] = useState<string[]>([INITIAL_SKILLS_VALUE]);
   const classes = useStyles();
-
-  const isGenderedFiltered = filteredGender && filteredGender !== "default";
-  const isStateFiltered = filteredState && filteredState !== "default";
 
   useEffect(() => {
     apis.getAllProfiles().then((response) => {
@@ -70,17 +85,18 @@ const list = () => {
   }, []);
 
   useEffect(() => {
-    if (isGenderedFiltered || isStateFiltered) {
+    if (isGenderedFiltered(filteredGender) || isStateFiltered(filteredState) || isSkillsFiltered(filteredSkills)) {
       const filteredProfiles = getFilteredProfiles(
         unfilteredProfiles,
         filteredGender,
-        filteredState
+        filteredState,
+        filteredSkills
       );
       setProfiles(filteredProfiles);
     } else {
       setProfiles(unfilteredProfiles);
     }
-  }, [filteredGender, filteredState]);
+  }, [filteredGender, filteredState, filteredSkills]);
 
   const handleFilteredGender = (
     event: React.ChangeEvent<{ name?: string; value: unknown }>
@@ -94,6 +110,24 @@ const list = () => {
   ) => {
     const value = event.target.value as string;
     setFilteredState(value);
+  };
+
+  const handleFilteredSkills = (
+    event: React.ChangeEvent<{ name?: string; value: unknown }>
+  ) => {
+    const value = event.target.value as string[];
+    const isSkillSelected = value.length !== 0
+
+    let updatedValue = []
+
+    if (value.length > 1) {
+      updatedValue = value.filter(element => element !== INITIAL_SKILLS_VALUE)
+    } else if (!isSkillSelected) {
+      updatedValue = [INITIAL_SKILLS_VALUE]
+    } else {
+      updatedValue = value
+    }
+    setFilteredSkills(updatedValue);
   };
 
   const getProfiles = () => {
@@ -115,6 +149,7 @@ const list = () => {
       <div className={classes.filters}>
         <GenderFilter className={classes.filtersInput} onChange={handleFilteredGender} value={filteredGender} />
         <StateFilter className={classes.filtersInput} onChange={handleFilteredState} value={filteredState} />
+        <SkillsFilter className={classes.filtersInput} onChange={handleFilteredSkills} value={filteredSkills} />
       </div>
       <div className={classes.root}>
         <Grid container spacing={3}>
@@ -126,3 +161,4 @@ const list = () => {
 };
 
 export default list;
+

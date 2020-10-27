@@ -36,25 +36,22 @@ describe("<List />", () => {
 		expect(filteredProfiles[0].gender).toBe("feminino")
 	})
 
-	it("should return filtered profiles by state", async () => {
+	it("should return filtered profiles by skills", async () => {
 		const secondProfile = {
 			...response.data,
-			gender: "masculino",
-			state: "RS"
+			skills: ["JavaScript", "Python"]
 		}
 		const thirdProfile = {
 			...secondProfile,
-			gender: "feminino",
-			state: "RJ"
+			skills: ["Java"]
 		}
 		const initialProfiles = [...response.data, secondProfile, thirdProfile]
-		const filteredProfiles = getFilteredProfiles(initialProfiles, "masculino", "RS")
-		expect(filteredProfiles).toHaveLength(1)
-		expect(filteredProfiles[0].gender).toBe("masculino")
-		expect(filteredProfiles[0].state).toBe("RS")
+		const filteredProfiles = getFilteredProfiles(initialProfiles, null, null, ["JavaScript"])
+		expect(filteredProfiles).toHaveLength(2)
+		expect(filteredProfiles[0].skills).toContain("JavaScript")
 	})
 
-	it("should return filtered profiles by gender and state", async () => {
+	it("should return filtered profiles by state", async () => {
 		const secondProfile = {
 			...response.data,
 			state: "RS"
@@ -67,6 +64,28 @@ describe("<List />", () => {
 		const filteredProfiles = getFilteredProfiles(initialProfiles, null, "RS")
 		expect(filteredProfiles).toHaveLength(2)
 		expect(filteredProfiles[0].state).toBe("RS")
+	})
+
+
+	it("should return filtered profiles by state, gender and skills", async () => {
+		const secondProfile = {
+			...response.data,
+			gender: "masculino",
+			state: "RS",
+			skills: ["Java"]
+		}
+		const thirdProfile = {
+			...secondProfile,
+			gender: "feminino",
+			state: "RJ",
+			skills: ["Python", "SQL"]
+		}
+		const initialProfiles = [...response.data, secondProfile, thirdProfile]
+		const filteredProfiles = getFilteredProfiles(initialProfiles, "masculino", "RS", ["Java"])
+		expect(filteredProfiles).toHaveLength(1)
+		expect(filteredProfiles[0].gender).toBe("masculino")
+		expect(filteredProfiles[0].state).toBe("RS")
+		expect(filteredProfiles[0].skills).toContain("Java")
 	})
 
 	it("should return empty if no profiles are given", async () => {

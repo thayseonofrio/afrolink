@@ -67,6 +67,37 @@ exports[`<List /> should render list with profile 1`] = `
         />
       </svg>
     </div>
+    <div
+      class="MuiInputBase-root MuiInput-root MuiInput-underline makeStyles-filtersInput-4"
+    >
+      <div
+        aria-haspopup="listbox"
+        aria-labelledby="skills-label skills-filter"
+        class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input"
+        id="skills-filter"
+        role="button"
+        tabindex="0"
+      >
+        Habilidades
+      </div>
+      <input
+        aria-hidden="true"
+        class="MuiSelect-nativeInput"
+        name="skills-filter"
+        tabindex="-1"
+        value="Habilidades"
+      />
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSelect-icon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M7 10l5 5 5-5z"
+        />
+      </svg>
+    </div>
   </div>
   <div
     class="makeStyles-root-1"

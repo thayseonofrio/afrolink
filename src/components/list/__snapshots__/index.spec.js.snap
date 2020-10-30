@@ -98,6 +98,37 @@ exports[`<List /> should render list with profile 1`] = `
         />
       </svg>
     </div>
+    <div
+      class="MuiInputBase-root MuiInput-root MuiInput-underline makeStyles-filtersInput-4"
+    >
+      <div
+        aria-haspopup="listbox"
+        aria-labelledby="experience-filter-input-label experience-filter"
+        class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input"
+        id="experience-filter"
+        role="button"
+        tabindex="0"
+      >
+        Experiência
+      </div>
+      <input
+        aria-hidden="true"
+        class="MuiSelect-nativeInput"
+        name="experience-filter"
+        tabindex="-1"
+        value="default"
+      />
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSelect-icon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M7 10l5 5 5-5z"
+        />
+      </svg>
+    </div>
   </div>
   <div
     class="makeStyles-root-1"
@@ -172,6 +203,7 @@ exports[`<List /> should render list with profile 1`] = `
               <a
                 class="social"
                 href="mailto:test@hotmail.com"
+                rel="noreferrer"
                 target="_blank"
               >
                 <img

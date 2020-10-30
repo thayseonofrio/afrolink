@@ -1,13 +1,13 @@
-import React from "react";
+import React from "react"
 import "./header.css"
 
 const header = () => {
-  return (
-    <div className="header">
-      <h1> AFROLINK </h1>
-      <p> Conheça as pessoas negras que trabalham com tecnologia no Brasil </p>
-    </div>
-  );
-};
+	return (
+		<div className="header">
+			<h1> AFROLINK </h1>
+			<p> Conheça as pessoas negras que trabalham com tecnologia no Brasil </p>
+		</div>
+	)
+}
 
-export default header;
+export default header

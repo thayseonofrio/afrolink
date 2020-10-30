@@ -12,7 +12,7 @@ const social = ({type, value}: SocialType) => {
 	}
 	const link = type == "email" ? `mailto:${value}` : `https://${value}`
 	return (
-		<a className="social" href={link} target="_blank">
+		<a className="social" href={link} target="_blank" rel="noreferrer">
 			{<img src={getIconPath(type)} alt={`${type} link`}/>}
 		</a>
 	)

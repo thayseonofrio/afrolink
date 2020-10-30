@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { hot } from "react-hot-loader";
-import "./App.css";
-import List from "./components/list";
-import Menu from "./components/menu";
-import Header from "./components/header";
-import Register from "./components/register";
+import React, { useState } from "react"
+import { hot } from "react-hot-loader"
+import "./App.css"
+import List from "./components/list"
+import Menu from "./components/menu"
+import Header from "./components/header"
+import Register from "./components/register"
 
 const App = () => {
 	const [toggleRegister, setToggleRegister] = useState(false)
@@ -21,7 +21,7 @@ const App = () => {
 			<Header />
 			{getPageToDisplay()}
 		</div>
-	);
-};
+	)
+}
 
-export default hot(module)(App);
+export default hot(module)(App)

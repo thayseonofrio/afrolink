@@ -4,6 +4,7 @@ import List from "."
 import { fireEvent, render } from "@testing-library/react"
 import profileData from "../../../__mocks__/profileData"
 import {getFilteredProfiles} from "."
+import { ExperienceFilter } from "./types"
 
 jest.mock("../../services/profile")
 
@@ -66,26 +67,43 @@ describe("<List />", () => {
 		expect(filteredProfiles[0].state).toBe("RS")
 	})
 
+	it("should return filtered profiles by experience", async () => {
+		const secondProfile = {
+			...response.data,
+			experience: 9
+		}
+		const thirdProfile = {
+			...secondProfile,
+			experience: 14
+		}
+		const initialProfiles = [...response.data, secondProfile, thirdProfile]
+		const filteredProfiles = getFilteredProfiles(initialProfiles, null, null, null, ExperienceFilter.OneToTwo)
+		expect(filteredProfiles).toHaveLength(2)
+		expect(filteredProfiles[0].experience).toBe(12)
+	})
 
-	it("should return filtered profiles by state, gender and skills", async () => {
+	it("should return filtered profiles by state, gender, skills and experience", async () => {
 		const secondProfile = {
 			...response.data,
 			gender: "masculino",
 			state: "RS",
-			skills: ["Java"]
+			skills: ["Java"],
+			experience: 27
 		}
 		const thirdProfile = {
 			...secondProfile,
 			gender: "feminino",
 			state: "RJ",
-			skills: ["Python", "SQL"]
+			skills: ["Python", "SQL"],
+			experience: 1
 		}
 		const initialProfiles = [...response.data, secondProfile, thirdProfile]
-		const filteredProfiles = getFilteredProfiles(initialProfiles, "masculino", "RS", ["Java"])
+		const filteredProfiles = getFilteredProfiles(initialProfiles, "masculino", "RS", ["Java"], ExperienceFilter.TwoToFour)
 		expect(filteredProfiles).toHaveLength(1)
 		expect(filteredProfiles[0].gender).toBe("masculino")
 		expect(filteredProfiles[0].state).toBe("RS")
 		expect(filteredProfiles[0].skills).toContain("Java")
+		expect(filteredProfiles[0].experience).toBe(27)
 	})
 
 	it("should return empty if no profiles are given", async () => {
@@ -109,5 +127,14 @@ describe("<List />", () => {
 		const option = await findByRole("option", { name: /Rio Grande do Sul/i })
 		fireEvent.click(option)
 		expect(await findAllByText(/RS/i)).toHaveLength(1)
+	})
+
+	it("should filter by selected experience option", async () => {
+		const {getByRole, findByRole, findAllByText} = render(<List />)
+		const selectExperience = getByRole("button", { name: /experiência/i })
+		fireEvent.keyDown(selectExperience, { keyCode: 40 })
+		const option = await findByRole("option", { name: /1 a 2 anos/i })
+		fireEvent.click(option)
+		expect(await findAllByText(/Tempo de experiência: 1 ano/i)).toHaveLength(1)
 	})
 })

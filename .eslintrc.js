@@ -1,19 +1,25 @@
 module.exports = {
-	"env": {
+	settings: {
+		react: {
+			"version": "latest",
+		},
+	},
+	env: {
 		"browser": true,
 		"es2020": true,
 		"jest": true,
 		"node": true
 	},
-	"extends": ["eslint:recommended", "plugin:react/recommended"],
-	"parserOptions": {
+	extends: ["eslint:recommended", "plugin:react/recommended"],
+	parser:"babel-eslint",
+	parserOptions: {
 		"ecmaVersion": 11,
 		"sourceType": "module",
 		"ecmaFeatures": {
 			"jsx": true
 		}
 	},
-	"rules": {
+	rules: {
 		"indent": [
 			"error",
 			"tab"
@@ -22,6 +28,7 @@ module.exports = {
 			"error",
 			"unix"
 		],
+		"no-undef": "off",
 		"quotes": [
 			"error",
 			"double"

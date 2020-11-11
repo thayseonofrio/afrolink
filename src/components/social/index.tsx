@@ -10,7 +10,8 @@ const social = ({type, value}: SocialType) => {
 	if (!value) {
 		return null
 	}
-	const link = type == "email" ? `mailto:${value}` : `https://${value}`
+	const rawValue = value.replace(/^(https?:|)\/\//, "")
+	const link = type == "email" ? `mailto:${rawValue}` : `https://${rawValue}`
 	return (
 		<a className="social" href={link} target="_blank" rel="noreferrer">
 			{<img src={getIconPath(type)} alt={`${type} link`}/>}
